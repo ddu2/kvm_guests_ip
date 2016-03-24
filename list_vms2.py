@@ -70,13 +70,9 @@ if os.getuid() != 0:
     quit()
 
 running_vms = get_running_vms()
-print running_vms
-print 
-print
 
 left_vms = []
 ip_mac_table = get_ip_mac_map()
-print ip_mac_table
 
 print "Node\t IP"
 for vm in running_vms:
