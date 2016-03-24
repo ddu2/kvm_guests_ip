@@ -31,7 +31,7 @@ list_vms = "virsh list | grep running | awk '{print $2}'"
 running_vms = subprocess.Popen(list_vms, shell=True, stdout=subprocess.PIPE).stdout.read().strip().split()
 
 # Choose whether you want to update the arp table or not.
-print "\tDo you want to update your arp table on your kvm host (Y/N)?"
+print "\tDo you want to update your arp table on your kvm host (y/N)?"
 print "\tPlease note you need to install fping package to accomplish this action"
 choice = raw_input("\tYour choice:  ")
 print
