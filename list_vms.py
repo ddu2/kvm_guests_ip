@@ -13,7 +13,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 import os
 
-# In RHEL, virsh commands need to be run by root.
+# In RHEL/CentOS, virsh command need to be run by root.
 if os.getuid() != 0:
     print "This script need to be run by user root!"
     quit()
