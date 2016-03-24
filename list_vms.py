@@ -30,10 +30,17 @@ print
 list_vms = "virsh list | grep running | awk '{print $2}'"
 running_vms = subprocess.Popen(list_vms, shell=True, stdout=subprocess.PIPE).stdout.read().strip().split()
 
-# use fping command to ping the network
-print "\tScanning local subnet 192.168.122.0/24 ............"
-os.system('fping -c1 -g 192.168.122.0/24 > /dev/null 2>&1')
+# Choose whether you want to update the arp table or not.
+print "\tDo you want to update your arp table on your kvm host (Y/N)?"
+print "\tPlease note you need to install fping package to accomplish this action"
+choice = raw_input("\tYour choice:  ")
 print
+
+# use fping command to ping the network
+if choice == "Y" or choice == "y":
+    print "\tScanning local subnet 192.168.122.0/24 ............"
+    os.system('fping -c1 -g 192.168.122.0/24 > /dev/null 2>&1')
+    print
 
 # get the ip and mac map and save them into a list named arp_table
 list_arp = "arp -an | sed 's/(//g' | sed 's/)//g' | grep -v incomplete | grep 192.168.122 | awk '{print $2,$4}'"
