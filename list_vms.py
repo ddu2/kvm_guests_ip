@@ -51,15 +51,19 @@ def refresh_arp():
     os.system('fping -c1 -g 192.168.122.0/24 > /dev/null 2>&1')
 
 ip_mac_table = get_ip_mac_table()
+outdate_vms = []
 
 print "===== Host ===\t\t\t=== IP ==="
 for vm in running_vms:
-    print "===== " + vm,
     ips = get_ip_address(vm)
     if not len(ips):
-        refresh_arp()
-        ip_mac_table = get_ip_mac_table()
-        ips = get_ip_address(vm)
-    print "\t\t" + ' '.join(get_ip_address(vm))
+        outdate_vms.append(vm)
+    else:
+        print "===== " + vm + "\t\t" + ' '.join(ips)
 
-print
+if len(outdate_vms):
+    refresh_arp()
+    ip_mac_table = get_ip_mac_table()
+    for vm in outdate_vms:
+        ips = get_ip_address(vm)
+        print "===== " + vm + "\t\t" + ' '.join(ips)
