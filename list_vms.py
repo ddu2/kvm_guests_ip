@@ -3,7 +3,7 @@
 # version:   0.3
 # python :   2.7
 # 
-# data: 2016-03-25
+# date: 2016-03-25
 #
 
 import subprocess
