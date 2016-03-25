@@ -53,13 +53,13 @@ def refresh_arp():
 ip_mac_table = get_ip_mac_table()
 outdate_vms = []
 
-print "===== Host ===\t\t\t=== IP ==="
+print "====== Host ===\t\t\t=== IP ==="
 for vm in running_vms:
     ips = get_ip_address(vm)
     if not len(ips):
         outdate_vms.append(vm)
     else:
-        print "===== " + vm + "\t\t" + ' '.join(ips)
+        print "====== " + vm + "\t\t" + ' '.join(ips)
 
 if len(outdate_vms):
     refresh_arp()
