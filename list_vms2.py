@@ -2,7 +2,7 @@
 
 # Print out IP of guest VMs
 #
-# Adapted from ddu@redhat.com
+# Adapted from dudp@foxmail.com
 # Adapted by feichashao@gmail.com
 # 
 # Python version 2.7
