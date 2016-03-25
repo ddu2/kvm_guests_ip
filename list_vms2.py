@@ -38,9 +38,9 @@ def get_ip_mac_map ():
         mac = arp_table.pop()
         ip = arp_table.pop()
         if mac in ip_mac_table:
-            ip_mac_table[mac] = [ip]
-        else:
             ip_mac_table[mac] += [ip]
+        else:
+            ip_mac_table[mac] = [ip]
     return ip_mac_table
 
 # Get IP address of a VM(node).
