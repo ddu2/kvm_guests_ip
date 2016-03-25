@@ -6,7 +6,7 @@
 # Adapted by feichashao@gmail.com
 # 
 # Python version 2.7
-# 2016.Mar.24
+# 2016.Mar.25
 #
 # Tested in RHEL6 KVM environment.
 #
@@ -30,14 +30,17 @@ fping_cmd = 'fping -c1 -g ' + subnet + ' > /dev/null 2>&1'
 
 #### Functions ####
 
-# Get IP/MAC mapping from arp table. ip_mac_table = { mac : ip  }
+# Get IP/MAC mapping from arp table. ip_mac_table = { mac : [ip]  }
 def get_ip_mac_map ():
     ip_mac_table = {}
     arp_table = subprocess.Popen(list_arp, shell=True, stdout=subprocess.PIPE).stdout.read().strip().split()
     while arp_table:
         mac = arp_table.pop()
         ip = arp_table.pop()
-        ip_mac_table[mac] = ip
+        if mac in ip_mac_table:
+            ip_mac_table[mac] = [ip]
+        else:
+            ip_mac_table[mac] += [ip]
     return ip_mac_table
 
 # Get IP address of a VM(node).
@@ -50,7 +53,7 @@ def get_node_ip (node, ip_mac_table):
         for mac in tree.findall('./devices/interface/mac'):
             mac_address = mac.attrib['address']
             if mac_address in ip_mac_table:
-                ip_list.append(ip_mac_table[mac_address])
+                ip_list += ip_mac_table[mac_address]
     except IOError as ioerror:
         print "Fire error: " + str(ioerror)
     return ip_list
