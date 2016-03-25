@@ -66,4 +66,4 @@ if len(outdate_vms):
     ip_mac_table = get_ip_mac_table()
     for vm in outdate_vms:
         ips = get_ip_address(vm)
-        print "===== " + vm + "\t\t" + ' '.join(ips)
+        print "====== " + vm + "\t\t" + ' '.join(ips)
